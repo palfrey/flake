@@ -7,6 +7,7 @@ RUN mkdir -p /opt/erlang/flake
 WORKDIR /opt/erlang/flake
 COPY . /opt/erlang/flake/
 RUN sed -i 's/en0/eth0/' rel/files/sys.config
+RUN echo -e "\n-noinput -noshell\n" >> rel/files/vm.args
 RUN rebar get-deps clean compile generate
 RUN rebar eunit app=flake
 CMD ./rel/flake/bin/flake
