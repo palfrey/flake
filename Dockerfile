@@ -6,6 +6,7 @@ RUN ln -s /opt/erlang/rebar/rebar /usr/local/bin/rebar
 RUN mkdir -p /opt/erlang/flake
 WORKDIR /opt/erlang/flake
 COPY . /opt/erlang/flake/
+RUN sed -i 's/en0/eth0/' rel/files/sys.config
 RUN rebar get-deps clean compile generate
 RUN rebar eunit app=flake
 CMD ./rel/flake/bin/flake
